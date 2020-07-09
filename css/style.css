@@ -1,0 +1,773 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Inter:300,400,500&display=swap');
+
+body{
+	overflow-x: none;
+}
+
+/*menu-button*/
+
+.button-container {
+	position: relative;
+	height: 18px;
+	width: 23px;
+	cursor: pointer;
+	z-index: 100;
+	-webkit-transition: opacity .25s ease;
+	transition: opacity .25s ease;
+}
+.button-container:hover {
+	opacity: .7;
+}
+.button-container.active .top {
+	-webkit-transform: translateY(10px) translateX(0) rotate(45deg);
+	      transform: translateY(5px) translateX(0) rotate(45deg);
+	background: #FFF;
+}
+.button-container.active .middle {
+	opacity: 0;
+	background: #FFF;
+}
+.button-container.active .bottom {
+	-webkit-transform: translateY(-10px) translateX(0) rotate(-45deg);
+	      transform: translateY(-10px) translateX(0) rotate(-45deg);
+	background: #FFF;
+}
+.button-container span {
+	background: #fff;
+	border: none;
+	height: 4px;
+	width: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0;
+	-webkit-transition: all .35s ease;
+	transition: all .35s ease;
+	cursor: pointer;
+}
+.button-container span:nth-of-type(2) {
+	top: 8px;
+	width: 70%;
+}
+.button-container span:nth-of-type(3) {
+	top: 16px;
+}
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 1;
+	visibility: hidden;
+	-webkit-transition: opacity .35s, visibility .35s, width .35s;
+	transition: opacity .35s, visibility .35s, width .35s;
+	z-index: 50;
+}
+.overlay:before {
+	content: '';
+	/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#c86772+0,fa7875+100 */
+	background: #c86772; /* Old browsers */
+	background: -moz-linear-gradient(left,  #c86772 0%, #fa7875 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left,  #c86772 0%,#fa7875 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right,  #c86772 0%,#fa7875 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c86772', endColorstr='#fa7875',GradientType=1 ); /* IE6-9 */    
+	left: -55%;
+	top: 0;
+	width: 50%;
+	height: 100%;
+	position: absolute;
+	-webkit-transition: left .35s ease;
+	transition: left .35s ease;
+}
+.overlay:after {
+	content: '';
+	/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#c86772+0,fa7875+100 */
+	background: #c86772; /* Old browsers */
+	background: -moz-linear-gradient(left,  #c86772 0%, #fa7875 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left,  #c86772 0%,#fa7875 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right,  #c86772 0%,#fa7875 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c86772', endColorstr='#fa7875',GradientType=1 ); /* IE6-9 */    
+	right: -55%;
+	top: 0;
+	width: 50%;
+	height: 100%;
+	position: absolute;
+	-webkit-transition: all .35s ease;
+	transition: all .35s ease;
+}
+.overlay.open {
+	opacity: .9;
+	visibility: visible;
+	height: 100%;
+}
+.overlay.open:before {
+	left: 0;
+}
+.overlay.open:after {
+	right: 0;
+}
+.overlay.open li {
+	-webkit-animation: fadeInRight .5s ease forwards;
+	      animation: fadeInRight .5s ease forwards;
+	-webkit-animation-delay: .35s;
+	      animation-delay: .35s;
+}
+.overlay.open li:nth-of-type(2) {
+	-webkit-animation-delay: .45s;
+	      animation-delay: .45s;
+}
+.overlay.open li:nth-of-type(3) {
+	-webkit-animation-delay: .55s;
+	      animation-delay: .55s;
+}
+.overlay.open li:nth-of-type(4) {
+	-webkit-animation-delay: .65s;
+	      animation-delay: .65s;
+}
+.overlay nav {
+	position: relative;
+	height: 70%;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	      transform: translateY(-50%);
+	font-size: 50px;
+	font-family: 'Vollkorn', serif;
+	font-weight: 400;
+	text-align: center;
+	z-index: 100;
+}
+.overlay ul {
+	list-style: none;
+	padding: 0;
+	margin: 0 auto;
+	display: inline-block;
+	position: relative;
+	height: 100%;
+}
+.overlay ul li {
+	display: block;
+	height: 25%;
+	height: calc(100% / 4);
+	min-height: 50px;
+	position: relative;
+	opacity: 0;
+}
+.overlay ul li a {
+	font-family: 'Poppins', sans-serif;
+	font-weight: bold;
+	display: block;
+	position: relative;
+	color: #FFF;
+	text-decoration: none;
+	overflow: hidden;
+}
+.overlay ul li a:hover:after, .overlay ul li a:focus:after, .overlay ul li a:active:after {
+	width: 100%;
+}
+.overlay ul li a:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0%;
+	-webkit-transform: translateX(-50%);
+	      transform: translateX(-50%);
+	height: 3px;
+	background: #FFF;
+	-webkit-transition: .35s;
+	transition: .35s;
+}
+
+@-webkit-keyframes fadeInRight {
+	0% {
+	opacity: 0;
+	left: 20%;
+	}
+	100% {
+	opacity: 1;
+	left: 0;
+	}
+}
+
+@keyframes fadeInRight {
+	0% {
+	opacity: 0;
+	left: 20%;
+	}
+	100% {
+	opacity: 1;
+	left: 0;
+	}
+}
+
+/*searchbar*/
+
+.searchbar{
+	margin-bottom: auto;
+	margin-top: auto;
+	height: 50px;
+	width: 50px;
+	/*background-color: #353b48;*/
+	/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#f57675+0,d76c73+49,d76c73+49,d26a72+51,b15f70+100 */
+	background: #f57675; /* Old browsers */
+	background: -moz-linear-gradient(top,  #f57675 0%, #d76c73 49%, #d76c73 49%, #d26a72 51%, #b15f70 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  #f57675 0%,#d76c73 49%,#d76c73 49%,#d26a72 51%,#b15f70 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  #f57675 0%,#d76c73 49%,#d76c73 49%,#d26a72 51%,#b15f70 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f57675', endColorstr='#b15f70',GradientType=0 ); /* IE6-9 */
+	border-radius: 30px;
+	padding: 10px;
+	position: relative;
+	transition: width 0.4s linear;
+}
+
+.searchbar:hover{
+	width: 300px;
+
+}
+
+.search-input{
+	color: white;
+	border: 0;
+	outline: 0;
+	background: none;
+	width: 0;
+	caret-color:transparent;
+	line-height: 40px;
+	transition: width 0.4s linear;
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 100%;
+	text-decoration: none;
+}
+
+.search-input:hover{
+	color: white;
+}
+
+.searchbar:hover > .search-input{
+	padding: 0 20px;
+	width: 100%;
+	caret-color:white;
+	transition: width 0.4s linear;
+}
+
+::placeholder{
+	color: #fff;
+}
+
+.search-icon{
+	height: 30px;
+	width: 30px;
+	float: right;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	color:white;
+	text-decoration:none;
+	font-size: 25px;
+}
+
+/*banner-content*/
+
+header{
+	padding-top: 20px;
+	position: relative;
+}
+
+.background1{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.vh-800{
+	min-height: 650px;
+}
+
+.banner-content{
+	padding-left: 8px;
+}
+
+.banner-content h1{
+	font-family: 'Poppins', sans-serif;
+	font-size: 50px;
+	font-weight: 700;
+	color: #3c3768;
+}
+
+.banner-content p{
+	font-family: 'Inter', sans-serif;
+	font-size: 18px;
+	font-weight: smooth;
+	color: #455a64;
+}
+
+.banner-content h6{
+	font-family: 'Inter', sans-serif;
+	font-size: 20px;
+	color: #455a64;
+	padding-bottom: 10px;
+}
+
+.form-inline ::placeholder{
+	font-family: 'Inter', sans-serif;
+	font-size: 18px;
+	font-weight: smooth;
+	color: #78909c;
+}
+
+.form-inline input{
+	font-family: 'Inter', sans-serif;
+	font-size: 18px;
+	color: #78909c;
+	border: 1px solid #80bdff00;
+	box-shadow: 0 30px 60px 0 #feefef;
+	padding: 30px 60px;
+}
+
+.form-inline button{
+	box-shadow: 0 30px 60px 0 #fdd2d1;
+	font-family: 'Poppins', sans-serif;
+	font-size: 18px;
+	font-weight: smooth;
+    color: white;
+	/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#c86772+0,fa7875+100 */
+	background: #c86772; /* Old browsers */
+	background: -moz-linear-gradient(left,  #c86772 0%, #fa7875 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left,  #c86772 0%,#fa7875 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right,  #c86772 0%,#fa7875 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c86772', endColorstr='#fa7875',GradientType=1 ); /* IE6-9 */    
+	padding: 16px 40px;
+	transition-duration: 0.4s;
+}
+
+.form-inline button:hover{
+	border: 1px solid #c86772;
+	color: #c86772;
+	background: transparent;
+}
+
+.form-control:focus{
+	color: #495057;
+	background-color: #fff;
+	border: 1px solid #c86772;
+	outline: 0;
+	box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+}
+
+/*service-section*/
+.service-section{
+	position: relative;
+	padding: 50px 0;
+}
+
+.service-section img{
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: -1;	
+}
+
+.service{
+	padding: 100px;
+	background: #ffffffb5;
+	position: relative;
+	z-index: 1;
+	box-shadow: 0 30px 60px 0 #feefef;
+}
+
+.service h2{
+	font-family: 'Poppins', sans-serif;
+	font-weight: 600;
+	font-size: 32px;
+	color: #3c3768;
+}
+
+.service p{
+	font-family: 'Inter', sans-serif;
+	font-size: 18px;
+	font-weight: smooth;	
+	color: #455a64;
+}
+
+.service a{
+	font-family: 'Poppins', sans-serif;
+	font-size: 20px;
+	font-weight: 500;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #fa7875;
+}
+.service span{
+	font-size: 20px;
+}
+.service span i{
+	padding-right: 3px;
+	font-size: 18px;
+}
+.section1{
+	padding-top: 150px;
+}
+.section1 img{
+	position: absolute;
+	left: 0;
+}
+.section2{
+	padding-top: 300px;
+}
+.section2 img{
+	position: absolute;
+	right: 0;
+}
+.section3{
+	padding-top: 250px;
+}
+.section3 img{
+	position: absolute;
+	left: 0;
+}
+
+/*subscription-section*/
+.subscription-section{
+	padding: 150px 0 100px;
+}
+
+.subscription-section .container{
+	background-image: url(../images/subscribe.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.subscription-section .row{
+	align-items: center;
+	padding-top: 65px;
+	padding-bottom: 65px;
+}
+
+.subscription-section h2{
+	font-family: 'Poppins', sans-serif;
+	font-size: 40px;
+	font-weight: smooth;
+	color: #fff;
+}
+
+.subscription-section p{
+	font-family: 'Inter', sans-serif;
+	font-size: 15px;
+	font-weight: smooth;
+	color: #c5cae9;
+}
+
+.subscription-section .form-inline input{
+	box-shadow: none;
+}
+
+.subscription-section .form-inline button{
+	box-shadow: none;
+}
+
+/*footer-menu*/
+footer{
+	position: relative;
+}
+footer > img{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: -1;
+}
+footer a img{}
+footer p{
+	font-family: 'Poppins', sans-serif;
+	font-size: 14px;
+	font-weight: smooth;	
+	color: #455a64;
+	margin: 40px 0 70px 0;
+}
+
+.footer-menu{}
+.footer-menu li:first-child {
+	color: #fa7875;
+}
+.footer-menu li{}
+.footer-menu li a{
+	font-family: 'Poppins', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	color: #455a64;
+	margin-bottom: 10px;
+	display: block;
+}
+.footer-menu li a:hover{
+	color: #fa7875;
+	text-decoration: none;
+}
+
+.social-list{}
+.social-list li{}
+.social-list li a{
+	font-size: 20px;
+	display: block;
+	width: 50px;
+	height: 50px;
+	background: #322e57;
+	color: #fff;
+	border-radius: 50%;
+	line-height: 50px;
+	text-align: center;
+	margin-right: 10px;
+	transition-duration: 0.4s;
+}
+.social-list li a:hover{
+	background: #fa7875;	
+}
+
+.copyright{
+	font-family: 'Poppins', sans-serif;
+	font-size: 16px;
+	color: #455a64;	
+}
+
+@media (max-width: 1199px){
+
+.vh-800{
+	min-height: 400px;
+}
+
+.banner-content{
+	padding-left: 10px;
+}
+
+.banner-content h1{
+	font-size: 35px;
+	font-weight: 700;
+}
+
+.banner-content p{
+	font-size: 12px;
+}
+
+.banner-content h6{
+	font-size: 14px;
+	padding-bottom: 5px;
+}
+
+.form-inline ::placeholder{
+	font-size: 12px;
+}
+
+.form-inline input{
+	font-size: 12px;
+	padding: 20px 40px;
+}
+
+.form-inline button{
+	font-size: 12px;
+	padding: 8px 20px;
+}
+
+.service-section{
+	padding: 30px 0;
+}
+.service{
+	padding: 80px;
+}
+
+.service h2{
+	font-weight: 600;
+	font-size: 22px;
+}
+
+.service p{
+	font-size: 15px;
+}
+
+.service a{
+	font-size: 14px;
+	font-weight: 400;
+}
+.service span{
+	font-size: 14px;
+}
+.service span i{
+	padding-right: 3px;
+	font-size: 12px;
+}
+.section1{
+	padding-top: 150px;
+}
+.section2{
+	padding-top: 450px;
+}
+.section3{
+	padding-top: 200px;
+}
+
+/*subscription-section*/
+.subscription-section{
+	padding: 100px 0 50px;
+}
+
+.subscription-section .row{
+	padding-top: 45px;
+	padding-bottom: 45px;
+}
+
+.subscription-section h2{
+	font-size: 30px;
+}
+
+.subscription-section p{
+	font-size: 12px;
+}
+
+/*footer*/
+footer p{
+	font-size: 13px;
+	margin: 35px 0 60px 0;
+}
+
+.footer-menu li a{
+	font-size: 14px;
+	font-weight: 400;
+	margin-bottom: 10px;
+}
+
+.social-list li a{
+	font-size: 16px;
+	width: 50px;
+	height: 50px;
+	background: #322e57;
+	color: #fff;
+	border-radius: 50%;
+	line-height: 50px;
+	text-align: center;
+	margin-right: 10px;
+	transition-duration: 0.4s;
+}
+
+.copyright{
+	font-size: 14px;
+}
+}
+
+@media (max-width: 991px){
+.vh-800{
+	min-height: 350px;
+}
+
+.banner-content h1{
+	font-size: 30px;
+	font-weight: 600;
+}
+
+.form-inline ::placeholder{
+	font-size: 12px;
+}
+
+.form-inline input{
+	font-size: 12px;
+	padding: 18px 28px;
+}
+
+.form-inline button{
+	font-size: 12px;
+	padding: 8px 18px;
+}
+.section1{
+	padding-top: 250px;
+}
+.section2{
+	padding-top: 350px;
+}
+.section3{
+	padding-top: 200px;
+}
+
+/*subscription-section*/
+.subscription-section{
+	padding: 120px 0 50px;
+}
+
+.subscription-section h2{
+	font-size: 25px;
+}
+
+.subscription-section p{
+	font-size: 12px;
+}
+
+/*footer*/
+
+.footer-menu{
+	justify-content: center;
+}
+
+.social-list{
+	justify-content: center;
+}
+
+.copyright{
+	text-align: center;	
+}
+}
+
+@media (max-width: 991px){
+.vh-800{
+	min-height: 300px;
+}
+.banner-content{
+	text-align: center;
+	box-shadow: 0 40px 60px 0 #feefef;
+}
+.banner-content h1{
+	font-size: 30px;
+	font-weight: 600;
+}
+.form-inline{
+	justify-content: center;
+}
+.form-inline ::placeholder{
+	font-size: 12px;
+}
+
+.form-inline input{
+	font-size: 10px;
+	padding: 8px 8px;
+}
+
+.form-inline button{
+	font-size: 10px;
+	padding: 5px 8px;
+}
+.banner-content button{
+	margin-bottom: 5px;
+}
+button{
+	margin-top: 5px;
+}
+.section2{
+	padding-top: 250px;
+}
+
+/*subscription-section*/
+.subscription-section{
+	padding: 50px 0 30px;
+}
+
+.subscription-section h2{
+	font-size: 15px;
+}
+
+.subscription-section p{
+	font-size: 10px;
+}
+
+.footer-menu{
+	text-align: center;
+}
+}
